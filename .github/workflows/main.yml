@@ -34,7 +34,7 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-# Installs Python 3.8
+    # Installs Python 3.8
       - uses: actions/setup-python@v2
         with:
           python-version: '3.8'
@@ -45,3 +45,8 @@ jobs:
           apt-get update && apt-get install libpq-dev
           pipx install meltano
           meltano install
+      # Run the pipeline using meltano
+      - name: Run the extract-load pipeline
+        run: |
+          meltano elt tap-carbon-intensity target-jsonl
+          echo "Extract-load completed successfully!"
